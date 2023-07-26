@@ -8,20 +8,18 @@ import "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
 import "./InitData.sol";
 
 /**
- * @title TheBestPhotography
- * @author Moderate97(^_^)
- * @dev Vk-oi-dang-o-dau-day--ve-voi-anh-di
+ * @title ProposalGreenEarthVoting
  */
-contract TheBestPhotography is Ownable, InitData {
+contract ProposalGreenEarthVoting is Ownable, InitData {
 
     using SafeERC20 for IERC20;
     mapping(uint256 => mapping(address => uint256)) public amountPerVoter;
     uint256 public totalVote;
 
-    uint256 private votingStartTime;
-    uint256 private votingEndTime;
+    uint256 public votingStartTime;
+    uint256 public votingEndTime;
 
-    uint256 constant REWARD_ARTIST = 500000000 * 10 ** 18;
+    uint256 constant REWARD_ARTIST = 5000 * 10 ** 18;
 
     IERC20 public TOKEN_VOTING;
 
@@ -35,7 +33,7 @@ contract TheBestPhotography is Ownable, InitData {
         _initializeData();
         votingStartTime = startTime_;
         votingEndTime = endTime_;
-        TOKEN_VOTING = IERC20(0x20fe7C3d1b76761E4A9D9ad244443c8985291645);
+        TOKEN_VOTING = IERC20(0x5de6CA1f91fB0d92dd0aaf34CDe761d9540CFEC7);
     }
 
     modifier _checkDate() {

@@ -213,11 +213,11 @@ const Home = () => {
   useEffect(() => {
     setIsLoading(
       isLoadingVoting ||
-        isFetchingTransaction ||
-        isLoadingTransactionVoting ||
-        isFetchingTransactionApprove ||
-        isLoadingTransactionApprove ||
-        isLoadingApprove,
+      isFetchingTransaction ||
+      isLoadingTransactionVoting ||
+      isFetchingTransactionApprove ||
+      isLoadingTransactionApprove ||
+      isLoadingApprove,
     )
   }, [
     isLoadingVoting,
@@ -276,9 +276,10 @@ const Home = () => {
       setData(
         (dataFetch as any[])?.map((e) => ({
           name: e.result[0],
-          avatar: e.result[1],
-          description: e.result[2],
-          amountVote: e.result[3],
+          photoBy: e.result[1],
+          url: e.result[2],
+          description: e.result[3],
+          amountVote: e.result[4],
         })),
       )
       console.log('Received data', dataFetch)
@@ -367,13 +368,13 @@ const Home = () => {
         )}
       </div>
       {!isLoadingFetchList && (
-        <div className="z-10 mt-5 text-center text-lg font-bold text-red-400">
+        <div className="z-10 mt-5 text-center text-lg font-bold text-green-700">
           <div>VOTING DURATION:</div>
           <div>{formatTime(dataTime[0]) + ' UTC ~ ' + formatTime(dataTime[1]) + ' UTC'}</div>
         </div>
       )}
       {!isLoadingFetchList && data && data.length > 0 && (
-        <div className="z-10 mt-5 font-bold text-green-700">
+        <div className="z-10 mt-5 font-bold text-red-700">
           TOTAL DEPOSITED TOKEN: {dataTotalVote} TBP
         </div>
       )}
@@ -386,7 +387,10 @@ const Home = () => {
               description: e.description,
               amountVote: e.amountVote,
               demo: (
-                <div className="flex flex-1 items-center justify-center space-x-20">
+                <div className="flex flex-1 group relative items-center justify-center cursor-pointer">
+                  <div className='w-full h-full z-10 absolute group-hover:opacity-60 opacity-0 bg-black'>
+                  </div>
+                  <a href={e.url} target='_blank' className='absolute group-hover:opacity-100 opacity-0 text-white font-medium z-20'>Open</a>
                   <ImageWithFallback
                     style={{ flex: 1 }}
                     alt={`${e.name}: ${e.description}`}
@@ -421,7 +425,7 @@ const Home = () => {
                         {Math.round(
                           (Number(utils.formatUnits(amountVote || BigNumber.from(0))) /
                             Number(dataTotalVote)) *
-                            100,
+                          100,
                         )}
                         %
                       </div>
@@ -430,7 +434,7 @@ const Home = () => {
                       <button
                         type="button"
                         disabled={isLoading && imageId === index + 1}
-                        className="inline-flex items-center rounded-md border border-black bg-black p-1.5 px-4 text-center text-sm text-white transition-all hover:bg-white hover:text-black"
+                        className="inline-flex items-center rounded-md border border-green-700 bg-green-700 p-1.5 px-4 text-center text-sm text-white transition-all hover:bg-white hover:text-green-700"
                         onClick={(e) => {
                           e.preventDefault()
                           onClickVote(index + 1)
@@ -440,12 +444,12 @@ const Home = () => {
                         {imageId !== index + 1
                           ? 'Vote'
                           : isFetchingTransaction || isLoadingTransactionVoting
-                          ? 'Confirming'
-                          : isLoadingApprove ||
-                            isFetchingTransactionApprove ||
-                            isLoadingTransactionApprove
-                          ? 'Approving'
-                          : 'Vote'}
+                            ? 'Confirming'
+                            : isLoadingApprove ||
+                              isFetchingTransactionApprove ||
+                              isLoadingTransactionApprove
+                              ? 'Approving'
+                              : 'Vote'}
                       </button>
                     </div>
                   </div>

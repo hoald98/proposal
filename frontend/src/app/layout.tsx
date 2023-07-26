@@ -18,11 +18,11 @@ import { authOptions } from '@/lib/auth'
 import { Toaster } from 'react-hot-toast'
 
 export const metadata = {
-  title: 'PhotoGraphy Voting',
+  title: 'Proposal Voting',
   description: 'A electoral system based blockchain.',
   twitter: {
     card: 'summary_large_image',
-    title: 'PhotoGraphy Voting',
+    title: 'Proposal Voting',
     description: 'A electoral system based blockchain.',
     creator: '@steventey',
   },
@@ -39,7 +39,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         <Suspense fallback="...">
           <NextAuthProvider>
             <Toaster />
-            <div className="fixed h-screen w-full bg-gradient-to-br from-indigo-50 via-white to-cyan-100" />
+            <div className="fixed h-screen w-full bg-gradient-to-br from-indigo-50 via-white to-green-500" />
             {/* @ts-expect-error Server Component */}
             <Nav session={session} />
             <main className="flex min-h-screen w-full flex-col items-center justify-center py-32">
